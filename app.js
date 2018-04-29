@@ -10,9 +10,7 @@ GAME RULES:
 
 var scores,roundScore,activePlayer;
 
-scores = [0,0];
-roundScore = 0;
-activePlayer = 0;
+init();
 
 document.querySelector('#score-' + activePlayer).textContent = 0;
 
@@ -37,33 +35,26 @@ document.querySelector('.btn-hold').addEventListener('click',function(){
 	roundScore = 0;
 	document.querySelector('#current-'+ activePlayer).textContent = roundScore;
 	if(!checkWinner()){
-			switchActivePlayer();
-
-		alert('switching to another player because current player clicked on hold');
+		switchActivePlayer();
+		alert('Switching to another player because current player clicked on hold');
 	};
 
 });
 
-document.querySelector('.btn-new').addEventListener('click',function(){
-	var abc;
-	var person = prompt("Please enter your name", abc);
-	console.log(abc);
-	document.querySelector('.dice').style.display = "none";
-	document.getElementById('score-0').textContent = 0;
-	document.getElementById('score-1').textContent = 0;
-	document.getElementById('current-0').textContent = 0;
-	document.getElementById('current-1').textContent = 0;
-});
+document.querySelector('.btn-new').addEventListener('click',init);
 
 function checkWinner(){
-	if(scores[0] >= 100){
-		alert('player1 wins the game');
+	if(scores[0] >= 10){
+		document.querySelector('#name-0').textContent = "Player1 Wins"
 		document.querySelector('.dice').style.display = "none";
+		document.querySelector('.player-0-panel').classList.toggle('active');	
 		return true;
 	} 
 	else if(scores[1] >= 100){
-		alert('player2 wins');
+		document.querySelector('#name-1').textContent = "Player2 Wins"
 		document.querySelector('.dice').style.display = "none";
+		document.querySelector('.player-1-panel').classList.toggle('active');
+			
 		return true;
 	}
 }
@@ -87,6 +78,18 @@ function switchActivePlayer(){
 		}
 }
 
+function init(){
+	scores = [0,0];
+	roundScore = 0;
+	activePlayer = 0;
+	document.querySelector('.dice').style.display = "none";
+	document.getElementById('score-0').textContent = 0;
+	document.getElementById('score-1').textContent = 0;
+	document.getElementById('current-0').textContent = 0;
+	document.getElementById('current-1').textContent = 0;
+	document.querySelector('#name-1').textContent = "Player2";
+	document.querySelector('#name-0').textContent = "Player1";		
+}
 
 
 
