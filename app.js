@@ -46,9 +46,12 @@ document.querySelector('.btn-hold').addEventListener('click',function(){
 	document.querySelector('#score-'+ activePlayer).textContent = scores[activePlayer];
 	roundScore = 0;
 	document.querySelector('#current-'+ activePlayer).textContent = roundScore;
-	checkWinner();
-	switchActivePlayer();
-	alert('switching to another player because current player clicked on hold');
+	if(!checkWinner()){
+			switchActivePlayer();
+
+		alert('switching to another player because current player clicked on hold');
+	};
+
 });
 
 document.querySelector('.btn-new').addEventListener('click',function(){
@@ -63,10 +66,12 @@ function checkWinner(){
 	if(scores[0] >= 100){
 		alert('player1 wins the game');
 		document.querySelector('.dice').style.display = "none";
+		return true;
 	} 
 	else if(scores[1] >= 100){
 		alert('player2 wins');
 		document.querySelector('.dice').style.display = "none";
+		return true;
 	}
 }
 
@@ -84,7 +89,6 @@ function switchActivePlayer(){
 			activePlayer = 0;
 			document.querySelector('.player-1-panel').classList.remove('active');
 			document.querySelector('.player-0-panel').classList.add('active');
-
 		}
 }
 
