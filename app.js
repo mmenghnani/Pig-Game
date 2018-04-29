@@ -20,16 +20,15 @@ document.querySelector('.btn-roll').addEventListener('click',function(){
 	var dice = Math.floor(Math.random() * 6) + 1;
 	var diceDom = document.querySelector('.dice');
 	diceDom.style.display = "block";
-	diceDom.src = 'dice-'+dice+'.png';
+	diceDom.src = 'dice-'+ dice +'.png';
 	if(dice !== 1){
 		roundScore += dice;
-		console.log('test');
+		document.querySelector('#current-'+ activePlayer).textContent = roundScore;
 	}
 	else {
 		alert('Switching to the other player because the dice rolled 1');
 		switchActivePlayer();
 	}	
-	document.querySelector('#current-'+ activePlayer).textContent = roundScore;
 });
 
 document.querySelector('.btn-hold').addEventListener('click',function(){
@@ -46,6 +45,9 @@ document.querySelector('.btn-hold').addEventListener('click',function(){
 });
 
 document.querySelector('.btn-new').addEventListener('click',function(){
+	var abc;
+	var person = prompt("Please enter your name", abc);
+	console.log(abc);
 	document.querySelector('.dice').style.display = "none";
 	document.getElementById('score-0').textContent = 0;
 	document.getElementById('score-1').textContent = 0;
@@ -71,15 +73,17 @@ function switchActivePlayer(){
 			roundScore = 0;
 			document.getElementById('current-0').textContent = 0;
 			activePlayer = 1;
-			document.querySelector('.player-0-panel').classList.remove('active');
-			document.querySelector('.player-1-panel').classList.add('active');
+			document.querySelector('.player-0-panel').classList.toggle('active');
+			document.querySelector('.player-1-panel').classList.toggle('active');
+			document.querySelector('.dice').style.display = "none";
 		}
 		else if(activePlayer == 1){
 			roundScore = 0;
 			document.getElementById('current-1').textContent = 0;
 			activePlayer = 0;
-			document.querySelector('.player-1-panel').classList.remove('active');
-			document.querySelector('.player-0-panel').classList.add('active');
+			document.querySelector('.player-1-panel').classList.toggle('active');
+			document.querySelector('.player-0-panel').classList.toggle('active');
+			document.querySelector('.dice').style.display = "none";
 		}
 }
 
